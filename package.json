@@ -7,6 +7,11 @@
     "build": "rm -rf build && babel src -d build",
     "dts": "dts-gen --expression-file build/esther.js"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run build"
+    }
+  },
   "dependencies": {
     "@google-cloud/logging-winston": "^1.1.0",
     "horeb": "^1.0.0",
@@ -28,7 +33,8 @@
     "eslint-plugin-import": "^2.9.0",
     "eslint-plugin-node": "^6.0.1",
     "eslint-plugin-promise": "^3.7.0",
-    "eslint-plugin-standard": "^3.0.1"
+    "eslint-plugin-standard": "^3.0.1",
+    "husky": "^3.0.0"
   },
   "repository": {
     "type": "git",
