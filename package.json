@@ -1,11 +1,11 @@
 {
   "name": "esther",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "A winston logger wrapper",
   "main": "./build/esther.js",
   "scripts": {
     "build": "rm -rf build && babel src -d build",
-    "dts": "dts-gen --expression-file build/esther.js"
+    "example:client": "babel-node ./example/client.js"
   },
   "husky": {
     "hooks": {
@@ -22,6 +22,7 @@
   "devDependencies": {
     "@babel/cli": "^7.2.0",
     "@babel/core": "^7.2.0",
+    "@babel/node": "^7.5.5",
     "@babel/preset-env": "^7.2.0",
     "babel-eslint": "^10.0.1",
     "babel-plugin-add-module-exports": "^1.0.2",

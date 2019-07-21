@@ -21,6 +21,8 @@ class Logger {
       ]
     });
 
+    this.disableStackTrace = false;
+
     // generate function definitions
     Object.keys(this.config.literal).forEach((l) => {
       Logger.prototype[l] = (...args) => {
@@ -140,14 +142,15 @@ class Logger {
 
   /**
    * @param {Object} options
-   * @param {String} option.level
-   * @param {Object} option.levels Object of levels with mapping of value
-   * @param {Object} options.colors
-   * @param {Boolean} options.useFileTransport
-   * @param {String} options.logDirectory
-   * @param {Boolean} options.useStackDriver
+   * @param {String} option.level log only if [`info.level`]
+   * @param {Object} option.levels levels representing log priorities
+   * @param {Object} options.colors colors representing log priorities
+   * @param {Object} options.disableStackTrace disable stack trace for handled errors
+   * @param {Object} options.transports Set of logging targets for logs
+   * @param {Boolean} options.useFileTransport If true, will generate and write logs to system
+   * @param {String} options.logDirectory Logs directory to be written to
+   * @param {Boolean} options.useStackDriver If true, logger will use google's `StackDriver`
    * @param {Object} options.stackDriverOpt I.E: { serviceName: 'Auth service', ver: '1.0,0' }
-   * @param {Object} options.transports
    */
   init(options) {
     const {
@@ -156,9 +159,10 @@ class Logger {
       colors = this.config.colors,
       // enableConsoleLogsInTest = true,
       useFileTransport = false,
-      logDirectory = path.join(__dirname, '.', 'logs'),
+      logDirectory = null,
       useStackDriver = false,
       stackDriverOpt = { serviceName: 'generic', ver: '1.0,0' },
+      disableStackTrace = false
     } = options;
 
     let { transports = [] } = options;
@@ -170,8 +174,12 @@ class Logger {
     winston.addColors(colors);
 
     this.logDirectory = logDirectory;
+    this.disableStackTrace = disableStackTrace;
 
     if (useFileTransport) {
+      if (!logDirectory) {
+        throw new CustomError('please provide a logDirectory');
+      }
       transports = [...transports, ...this.fileTransports];
       if (!fs.existsSync(logDirectory)) {
         fs.mkdirSync(logDirectory);

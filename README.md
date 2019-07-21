@@ -24,6 +24,7 @@ This works with `ES6` syntax such as `import`.
 | `level`       | `'info'`      | Log only if `verbose` is less than or equal to this level |
 | `levels`      | `esther.config.levels`      | Levels representing log priorities |  
 | `colors`      | `esther.config.colors`      | colors representing log priorities |  
+| `disableStackTrace`      | `false`      | Disable logging of stack trace for `isHandledError`. I.E `logger.error(new Error(), { isHandledError: true });` [Example](#disable-stack-trace) |  
 | `transports`  | `[]` _(Console Transport)_  | Set of logging targets for logs |  
 | `useFileTransport` | `false` | If true, will generate and write logs to system  |  
 | `logDirectory` | `Root directory of project` (__dirname) | Logs directory to be written to |  
@@ -32,6 +33,21 @@ This works with `ES6` syntax such as `import`.
 
 Refer to [Stackdriver][google-winston] docs on how to setup your google service account. Alternatively, if you're deploying your app with `kubernetes` on `GKE`, each pod is configured with the `default` service account
 
+# Disable Stack Trace
+```
+import { BadRequest } from 'horeb';
+import path from 'path';
+import logger from 'esther';
+
+logger.init({
+  disableStackTrace: true,
+  useFileTransport: true,
+  logDirectory: path.join(__dirname, 'logs'),
+});
+const err = new BadRequest('invalid parameters');
+logger.error(err, { isHandledError: true });
+// Prints out message only
+```
 
 # TODO
 Parameterized options

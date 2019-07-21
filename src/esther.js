@@ -81,7 +81,10 @@ const esther = {
         logger.error(...loggerArgs);
       }
       else {
-        logger.verbose(...loggerArgs); // Ignore 4xx
+        if (logger.disableStackTrace) {
+          loggerArgs[0] = `${err.name}: ${err.message}`;
+        }
+        logger.warn(...loggerArgs); // Ignore 4xx
       }
     }
     else {

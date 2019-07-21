@@ -33,6 +33,7 @@ export const config: {
  * @param {String} option.level log only if [`info.level`]
  * @param {Object} option.levels levels representing log priorities
  * @param {Object} options.colors colors representing log priorities
+ * @param {Object} options.disableStackTrace disable stack trace for handled errors
  * @param {Object} options.transports Set of logging targets for logs
  * @param {Boolean} options.useFileTransport If true, will generate and write logs to system
  * @param {String} options.logDirectory Logs directory to be written to
