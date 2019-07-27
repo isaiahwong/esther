@@ -1,6 +1,6 @@
 {
   "name": "esther",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "A winston logger wrapper",
   "main": "./build/esther.js",
   "scripts": {

@@ -4,6 +4,12 @@ import Logger from './libs/logger';
 
 const logger = new Logger();
 
+if (logger.disableBrowser && process.env.BROWSER) {
+  throw new CustomError(
+    'Do not import `logger.js` from inside the client-side code.',
+  );
+}
+
 // Logger interface
 const esther = {
   config: logger.config,
@@ -13,6 +19,8 @@ const esther = {
    * @param {String} option.level log only if [`info.level`]
    * @param {Object} option.levels levels representing log priorities
    * @param {Object} options.colors colors representing log priorities
+   * @param {Object} options.disableStackTrace disable stack trace for handled errors
+   * @param {Object} options.disableBrowser disable logger on the browser
    * @param {Object} options.transports Set of logging targets for logs
    * @param {Boolean} options.useFileTransport If true, will generate and write logs to system
    * @param {String} options.logDirectory Logs directory to be written to

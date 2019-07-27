@@ -21,6 +21,7 @@ class Logger {
       ]
     });
 
+    this.disableBrowser = true;
     this.disableStackTrace = false;
 
     // generate function definitions
@@ -146,6 +147,7 @@ class Logger {
    * @param {Object} option.levels levels representing log priorities
    * @param {Object} options.colors colors representing log priorities
    * @param {Object} options.disableStackTrace disable stack trace for handled errors
+   * @param {Object} options.disableBrowser disable logger on the browser
    * @param {Object} options.transports Set of logging targets for logs
    * @param {Boolean} options.useFileTransport If true, will generate and write logs to system
    * @param {String} options.logDirectory Logs directory to be written to
@@ -162,7 +164,8 @@ class Logger {
       logDirectory = null,
       useStackDriver = false,
       stackDriverOpt = { serviceName: 'generic', ver: '1.0,0' },
-      disableStackTrace = false
+      disableStackTrace = false,
+      disableBrowser = false
     } = options;
 
     let { transports = [] } = options;
@@ -175,6 +178,7 @@ class Logger {
 
     this.logDirectory = logDirectory;
     this.disableStackTrace = disableStackTrace;
+    this.disableBrowser = disableBrowser;
 
     if (useFileTransport) {
       if (!logDirectory) {
