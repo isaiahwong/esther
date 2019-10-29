@@ -5,16 +5,17 @@
   "main": "./build/esther.js",
   "scripts": {
     "build": "rm -rf build && babel src -d build",
+    "test": "npm run build && node example/client.js",
     "example:client": "babel-node ./example/client.js"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run build"
+      "pre-commit": "npm run test && npm run build"
     }
   },
   "dependencies": {
     "@google-cloud/logging-winston": "^1.1.0",
-    "horeb": "^1.0.0",
+    "horeb": "^1.1.2",
     "lodash": "^4.17.14",
     "winston": "^3.2.1",
     "winston-daily-rotate-file": "^3.9.0"

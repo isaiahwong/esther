@@ -1,6 +1,6 @@
-import { BadRequest } from 'horeb';
-import path from 'path';
-import logger from '../src/esther';
+const path = require('path');
+const { BadRequest } = require('horeb');
+const logger = require('../build/esther');
 
 logger.init({
   disableStackTrace: true,
