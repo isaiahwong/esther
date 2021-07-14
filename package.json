@@ -1,6 +1,6 @@
 {
   "name": "esther",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "A winston logger wrapper",
   "main": "./build/esther.js",
   "scripts": {
@@ -14,9 +14,9 @@
     }
   },
   "dependencies": {
-    "@google-cloud/logging-winston": "^1.1.0",
+    "@google-cloud/logging-winston": "^4.1.0",
     "horeb": "^1.1.2",
-    "lodash": "^4.17.14",
+    "lodash": "^4.17.21",
     "winston": "^3.2.1",
     "winston-daily-rotate-file": "^3.9.0"
   },
